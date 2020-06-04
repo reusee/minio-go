@@ -22,6 +22,7 @@ package main
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
@@ -39,7 +40,6 @@ import (
 	"time"
 
 	"github.com/dustin/go-humanize"
-	jsoniter "github.com/json-iterator/go"
 	log "github.com/sirupsen/logrus"
 
 	"github.com/minio/minio-go/v6"
@@ -75,7 +75,6 @@ func (f *mintJSONFormatter) Format(entry *log.Entry) ([]byte, error) {
 			data[k] = v
 		}
 	}
-	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	serialized, err := json.Marshal(data)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to marshal fields to JSON, %v", err)
