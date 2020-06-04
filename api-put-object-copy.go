@@ -24,8 +24,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/minio/minio-go/v6/pkg/encrypt"
-	"github.com/minio/minio-go/v6/pkg/s3utils"
+	"github.com/reusee/minio-go/v6/pkg/encrypt"
+	"github.com/reusee/minio-go/v6/pkg/s3utils"
 )
 
 // CopyObject - copy a source object into a new object

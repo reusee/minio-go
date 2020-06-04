@@ -23,8 +23,8 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/minio/minio-go/v6/pkg/s3utils"
-	"github.com/minio/minio-go/v6/pkg/signer"
+	"github.com/reusee/minio-go/v6/pkg/s3utils"
+	"github.com/reusee/minio-go/v6/pkg/signer"
 )
 
 // presignURL - Returns a presigned URL for an input 'method'.

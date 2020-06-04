@@ -22,7 +22,7 @@ package main
 import (
 	"log"
 
-	"github.com/minio/minio-go/v6"
+	"github.com/reusee/minio-go/v6"
 )
 
 func main() {

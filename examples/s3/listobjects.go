@@ -22,7 +22,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/minio/minio-go/v6"
+	"github.com/reusee/minio-go/v6"
 )
 
 func main() {

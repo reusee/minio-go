@@ -22,8 +22,8 @@ package main
 import (
 	"log"
 
-	minio "github.com/minio/minio-go/v6"
-	"github.com/minio/minio-go/v6/pkg/tags"
+	minio "github.com/reusee/minio-go/v6"
+	"github.com/reusee/minio-go/v6/pkg/tags"
 )
 
 func main() {
