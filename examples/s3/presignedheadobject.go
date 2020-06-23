@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net/url"
 	"time"
@@ -46,7 +47,7 @@ func main() {
 	reqParams.Set("response-content-disposition", "attachment; filename=\"your-filename.txt\"")
 
 	// Gernerate presigned get object url.
-	presignedURL, err := s3Client.PresignedHeadObject("my-bucketname", "my-objectname", time.Duration(1000)*time.Second, reqParams)
+	presignedURL, err := s3Client.PresignedHeadObject(context.Background(), "my-bucketname", "my-objectname", time.Duration(1000)*time.Second, reqParams)
 	if err != nil {
 		log.Fatalln(err)
 	}

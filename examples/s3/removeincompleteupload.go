@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	"github.com/reusee/minio-go/v6"
@@ -39,7 +40,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	err = s3Client.RemoveIncompleteUpload("my-bucketname", "my-objectname")
+	err = s3Client.RemoveIncompleteUpload(context.Background(), "my-bucketname", "my-objectname")
 	if err != nil {
 		log.Fatalln(err)
 	}

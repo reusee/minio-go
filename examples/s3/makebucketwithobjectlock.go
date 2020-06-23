@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	minio "github.com/reusee/minio-go/v6"
@@ -39,7 +40,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	err = s3Client.MakeBucketWithObjectLock("my-bucketname", "us-east-1")
+	err = s3Client.MakeBucketWithObjectLock(context.Background(), "my-bucketname", "us-east-1")
 	if err != nil {
 		log.Fatalln(err)
 	}

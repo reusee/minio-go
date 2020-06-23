@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"io"
 	"log"
 	"os"
@@ -41,7 +42,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	reader, err := s3Client.GetObject("my-bucketname", "my-objectname", minio.GetObjectOptions{})
+	reader, err := s3Client.GetObject(context.Background(), "my-bucketname", "my-objectname", minio.GetObjectOptions{})
 	if err != nil {
 		log.Fatalln(err)
 	}

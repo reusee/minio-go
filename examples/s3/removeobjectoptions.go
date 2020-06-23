@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	"github.com/reusee/minio-go/v6"
@@ -41,7 +42,7 @@ func main() {
 	opts := minio.RemoveObjectOptions{
 		GovernanceBypass: true,
 	}
-	err = s3Client.RemoveObjectWithOptions("my-bucket", "my-object", opts)
+	err = s3Client.RemoveObjectWithOptions(context.Background(), "my-bucket", "my-object", opts)
 	if err != nil {
 		log.Fatalln(err)
 	}

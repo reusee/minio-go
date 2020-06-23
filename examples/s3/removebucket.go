@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	"github.com/reusee/minio-go/v6"
@@ -40,7 +41,7 @@ func main() {
 	}
 
 	// This operation will only work if your bucket is empty.
-	err = s3Client.RemoveBucket("my-bucketname")
+	err = s3Client.RemoveBucket(context.Background(), "my-bucketname")
 	if err != nil {
 		log.Fatalln(err)
 	}

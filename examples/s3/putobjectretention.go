@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"log"
 	"time"
 
@@ -46,7 +47,7 @@ func main() {
 		RetainUntilDate:  &t,
 		Mode:             &m,
 	}
-	err = s3Client.PutObjectRetention("my-bucket", "my-object", opts)
+	err = s3Client.PutObjectRetention(context.Background(), "my-bucket", "my-object", opts)
 	if err != nil {
 		log.Fatalln(err)
 	}

@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	"github.com/reusee/minio-go/v6"
@@ -78,7 +79,7 @@ func main() {
 	bucketNotification.AddQueue(queueConfig)
 	bucketNotification.AddLambda(lambdaConfig)
 
-	err = s3Client.SetBucketNotification("YOUR-BUCKET", bucketNotification)
+	err = s3Client.SetBucketNotification(context.Background(), "YOUR-BUCKET", bucketNotification)
 	if err != nil {
 		log.Fatalln("Error: " + err.Error())
 	}

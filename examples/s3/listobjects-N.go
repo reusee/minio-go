@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/reusee/minio-go/v6"
@@ -49,7 +50,7 @@ func main() {
 		defer close(doneCh)
 
 		i := 1
-		for object := range s3Client.ListObjects(bucket, prefix, recursive, doneCh) {
+		for object := range s3Client.ListObjects(context.Background(), bucket, prefix, recursive, doneCh) {
 			if object.Err != nil {
 				return nil, object.Err
 			}

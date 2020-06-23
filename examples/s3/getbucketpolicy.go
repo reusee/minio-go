@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"io"
 	"log"
 	"os"
@@ -44,7 +45,7 @@ func main() {
 
 	// s3Client.TraceOn(os.Stderr)
 
-	policy, err := s3Client.GetBucketPolicy("my-bucketname")
+	policy, err := s3Client.GetBucketPolicy(context.Background(), "my-bucketname")
 	if err != nil {
 		log.Fatalln(err)
 	}

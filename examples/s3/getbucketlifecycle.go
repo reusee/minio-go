@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"io"
 	"log"
 	"os"
@@ -45,7 +46,7 @@ func main() {
 	// s3Client.TraceOn(os.Stderr)
 
 	// Get bucket lifecycle from S3
-	lifecycle, err := s3Client.GetBucketLifecycle("my-bucketname")
+	lifecycle, err := s3Client.GetBucketLifecycle(context.Background(), "my-bucketname")
 	if err != nil {
 		log.Fatalln(err)
 	}

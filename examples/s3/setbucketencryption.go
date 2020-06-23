@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	"github.com/reusee/minio-go/v6"
@@ -51,7 +52,7 @@ func main() {
 			},
 		},
 	}}
-	err = s3Client.SetBucketEncryption("my-bucketname", config)
+	err = s3Client.SetBucketEncryption(context.Background(), "my-bucketname", config)
 	if err != nil {
 		log.Fatalln(err)
 	}

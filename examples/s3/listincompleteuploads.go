@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 
@@ -47,7 +48,7 @@ func main() {
 	defer close(doneCh)
 
 	// List all multipart uploads from a bucket-name with a matching prefix.
-	for multipartObject := range s3Client.ListIncompleteUploads("my-bucketname", "my-prefixname", true, doneCh) {
+	for multipartObject := range s3Client.ListIncompleteUploads(context.Background(), "my-bucketname", "my-prefixname", true, doneCh) {
 		if multipartObject.Err != nil {
 			fmt.Println(multipartObject.Err)
 			return

@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 
@@ -40,7 +41,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	objectInfo, err := s3Client.GetObjectACL("my-bucketname", "my-objectname")
+	objectInfo, err := s3Client.GetObjectACL(context.Background(), "my-bucketname", "my-objectname")
 	if err != nil {
 		log.Fatalln(err)
 	}

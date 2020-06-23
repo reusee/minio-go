@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"time"
@@ -47,7 +48,7 @@ func main() {
 	// Expires in 10 days.
 	policy.SetExpires(time.Now().UTC().AddDate(0, 0, 10))
 	// Returns form data for POST form request.
-	url, formData, err := s3Client.PresignedPostPolicy(policy)
+	url, formData, err := s3Client.PresignedPostPolicy(context.Background(), policy)
 	if err != nil {
 		log.Fatalln(err)
 	}

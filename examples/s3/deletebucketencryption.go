@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	"github.com/reusee/minio-go/v6"
@@ -42,7 +43,7 @@ func main() {
 	// s3Client.TraceOn(os.Stderr)
 
 	// Get default encryption configuration set on a S3 bucket
-	err = s3Client.DeleteBucketEncryption("my-bucketname")
+	err = s3Client.DeleteBucketEncryption(context.Background(), "my-bucketname")
 	if err != nil {
 		log.Fatalln(err)
 	}

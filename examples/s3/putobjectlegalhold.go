@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	"github.com/reusee/minio-go/v6"
@@ -42,7 +43,7 @@ func main() {
 	opts := minio.PutObjectLegalHoldOptions{
 		Status: &s,
 	}
-	err = s3Client.PutObjectLegalHold("my-bucket", "my-object", opts)
+	err = s3Client.PutObjectLegalHold(context.Background(), "my-bucket", "my-object", opts)
 	if err != nil {
 		log.Fatalln(err)
 	}

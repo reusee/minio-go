@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 
@@ -44,7 +45,7 @@ func main() {
 
 	// Get versioning configuration set on an S3 bucket,
 	// and print out the versioning configuration.
-	versioningConfig, err := s3Client.GetBucketVersioning("my-bucketname")
+	versioningConfig, err := s3Client.GetBucketVersioning(context.Background(), "my-bucketname")
 	if err != nil {
 		log.Fatalln(err)
 	}

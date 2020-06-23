@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"log"
 	"time"
 
@@ -67,7 +68,7 @@ func main() {
 	}
 
 	// Initiate copy object.
-	err = s3Client.CopyObject(dst, src)
+	err = s3Client.CopyObject(context.Background(), dst, src)
 	if err != nil {
 		log.Fatalln(err)
 	}

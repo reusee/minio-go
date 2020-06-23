@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	"github.com/reusee/minio-go/v6"
@@ -39,7 +40,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	buckets, err := s3Client.ListBuckets()
+	buckets, err := s3Client.ListBuckets(context.Background())
 	if err != nil {
 		log.Fatalln(err)
 	}

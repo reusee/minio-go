@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	minio "github.com/reusee/minio-go/v6"
@@ -70,7 +71,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	err = s3Client.ComposeObject(dst, srcs)
+	err = s3Client.ComposeObject(context.Background(), dst, srcs)
 	if err != nil {
 		log.Fatalln(err)
 	}

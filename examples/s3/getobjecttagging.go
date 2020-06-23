@@ -20,6 +20,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 
@@ -39,7 +40,7 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	tags, err := s3Client.GetObjectTagging("my-bucketname", "my-objectname")
+	tags, err := s3Client.GetObjectTagging(context.Background(), "my-bucketname", "my-objectname")
 	if err != nil {
 		log.Fatalln(err)
 	}
