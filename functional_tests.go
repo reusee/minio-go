@@ -321,11 +321,11 @@ func testMakeBucketError() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket in 'eu-central-1'.
-	if err = c.MakeBucket(context.Background(), bucketName, region); err != nil {
+	if err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: region}); err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket Failed", err)
 		return
 	}
-	if err = c.MakeBucket(context.Background(), bucketName, region); err == nil {
+	if err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: region}); err == nil {
 		logError(testName, function, args, startTime, "", "Bucket already exists", err)
 		return
 	}
@@ -373,7 +373,7 @@ func testMetadataSizeLimit() {
 	objectName := randString(60, rand.NewSource(time.Now().UnixNano()), "")
 	args["objectName"] = objectName
 
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "Make bucket failed", err)
 		return
@@ -457,7 +457,7 @@ func testMakeBucketRegions() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket in 'eu-central-1'.
-	if err = c.MakeBucket(context.Background(), bucketName, region); err != nil {
+	if err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: region}); err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
 	}
@@ -473,7 +473,7 @@ func testMakeBucketRegions() {
 	// virtual host style.
 	region = "us-west-2"
 	args["region"] = region
-	if err = c.MakeBucket(context.Background(), bucketName+".withperiod", region); err != nil {
+	if err = c.MakeBucket(context.Background(), bucketName+".withperiod", minio.MakeBucketOptions{Region: region}); err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
 	}
@@ -524,7 +524,7 @@ func testPutObjectReadAt() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "Make bucket failed", err)
 		return
@@ -634,7 +634,7 @@ func testPutObjectWithMetadata() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "Make bucket failed", err)
 		return
@@ -744,7 +744,7 @@ func testPutObjectWithContentLanguage() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test-")
 	args["bucketName"] = bucketName
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -823,7 +823,7 @@ func testPutObjectStreaming() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test-")
 	args["bucketName"] = bucketName
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -889,7 +889,7 @@ func testGetObjectSeekEnd() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -1021,7 +1021,7 @@ func testGetObjectClosedTwice() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -1116,7 +1116,7 @@ func testRemoveObjectsWithContext() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 	}
@@ -1213,7 +1213,7 @@ func testRemoveMultipleObjects() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -1300,7 +1300,7 @@ func testFPutObjectMultipart() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -1417,7 +1417,7 @@ func testFPutObject() {
 	args["bucketName"] = bucketName
 	args["location"] = location
 	function = "MakeBucket(bucketName, location)"
-	err = c.MakeBucket(context.Background(), bucketName, location)
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: location})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -1596,7 +1596,7 @@ func testFPutObjectWithContext() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -1707,7 +1707,7 @@ func testFPutObjectWithContextV2() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -1817,7 +1817,7 @@ func testPutObjectWithContext() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test-")
 	args["bucketName"] = bucketName
 
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket call failed", err)
 		return
@@ -1895,7 +1895,7 @@ func testGetObjectReadSeekFunctional() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -2070,7 +2070,7 @@ func testGetObjectReadAtFunctional() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -2255,7 +2255,7 @@ func testGetObjectReadAtWhenEOFWasReached() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -2383,7 +2383,7 @@ func testPresignedPostPolicy() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test-")
 
 	// Make a new bucket in 'us-east-1' (source bucket).
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -2605,14 +2605,14 @@ func testCopyObject() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test-")
 
 	// Make a new bucket in 'us-east-1' (source bucket).
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
 	}
 
 	// Make a new bucket in 'us-east-1' (destination bucket).
-	err = c.MakeBucket(context.Background(), bucketName+"-copy", "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName+"-copy", minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -2836,7 +2836,7 @@ func testSSECEncryptedGetObjectReadSeekFunctional() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -3024,7 +3024,7 @@ func testSSES3EncryptedGetObjectReadSeekFunctional() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -3210,7 +3210,7 @@ func testSSECEncryptedGetObjectReadAtFunctional() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -3401,7 +3401,7 @@ func testSSES3EncryptedGetObjectReadAtFunctional() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -3593,7 +3593,7 @@ func testSSECEncryptionPutGet() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -3707,7 +3707,7 @@ func testSSECEncryptionFPut() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -3834,7 +3834,7 @@ func testSSES3EncryptionPutGet() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -3946,7 +3946,7 @@ func testSSES3EncryptionFPut() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -4176,7 +4176,7 @@ func testFunctional() {
 	function = "MakeBucket(bucketName, region)"
 	functionAll = "MakeBucket(bucketName, region)"
 	args["bucketName"] = bucketName
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
@@ -4810,7 +4810,7 @@ func testGetObjectModified() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test-")
 	args["bucketName"] = bucketName
 
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -4910,7 +4910,7 @@ func testPutObjectUploadSeekedObject() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test-")
 	args["bucketName"] = bucketName
 
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -5046,11 +5046,11 @@ func testMakeBucketErrorV2() {
 	args["region"] = region
 
 	// Make a new bucket in 'eu-west-1'.
-	if err = c.MakeBucket(context.Background(), bucketName, region); err != nil {
+	if err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: region}); err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
 	}
-	if err = c.MakeBucket(context.Background(), bucketName, region); err == nil {
+	if err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: region}); err == nil {
 		logError(testName, function, args, startTime, "", "MakeBucket did not fail for existing bucket name", err)
 		return
 	}
@@ -5105,7 +5105,7 @@ func testGetObjectClosedTwiceV2() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -5205,7 +5205,7 @@ func testFPutObjectV2() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -5372,7 +5372,7 @@ func testMakeBucketRegionsV2() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket in 'eu-central-1'.
-	if err = c.MakeBucket(context.Background(), bucketName, "eu-west-1"); err != nil {
+	if err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "eu-west-1"}); err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
 	}
@@ -5385,7 +5385,7 @@ func testMakeBucketRegionsV2() {
 	// Make a new bucket with '.' in its name, in 'us-west-2'. This
 	// request is internally staged into a path style instead of
 	// virtual host style.
-	if err = c.MakeBucket(context.Background(), bucketName+".withperiod", "us-west-2"); err != nil {
+	if err = c.MakeBucket(context.Background(), bucketName+".withperiod", minio.MakeBucketOptions{Region: "us-west-2"}); err != nil {
 		args["bucketName"] = bucketName + ".withperiod"
 		args["region"] = "us-west-2"
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
@@ -5435,7 +5435,7 @@ func testGetObjectReadSeekFunctionalV2() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -5599,7 +5599,7 @@ func testGetObjectReadAtFunctionalV2() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -5768,14 +5768,14 @@ func testCopyObjectV2() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test-")
 
 	// Make a new bucket in 'us-east-1' (source bucket).
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
 	}
 
 	// Make a new bucket in 'us-east-1' (destination bucket).
-	err = c.MakeBucket(context.Background(), bucketName+"-copy", "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName+"-copy", minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -5940,7 +5940,7 @@ func testComposeObjectErrorCasesWrapper(c *minio.Client) {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test-")
 
 	// Make a new bucket in 'us-east-1' (source bucket).
-	err := c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err := c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
@@ -6041,7 +6041,7 @@ func testComposeMultipleSources(c *minio.Client) {
 	// Generate a new random bucket name.
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test-")
 	// Make a new bucket in 'us-east-1' (source bucket).
-	err := c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err := c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -6146,7 +6146,7 @@ func testEncryptedEmptyObject() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test-")
 	args["bucketName"] = bucketName
 	// Make a new bucket in 'us-east-1' (source bucket).
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -6232,7 +6232,7 @@ func testEncryptedCopyObjectWrapper(c *minio.Client, bucketName string, sseSrc, 
 	var srcEncryption, dstEncryption encrypt.ServerSide
 
 	// Make a new bucket in 'us-east-1' (source bucket).
-	err := c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err := c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -6673,7 +6673,7 @@ func testDecryptedCopyObject() {
 	}
 
 	bucketName, objectName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test-"), "object"
-	if err = c.MakeBucket(context.Background(), bucketName, "us-east-1"); err != nil {
+	if err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"}); err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
 	}
@@ -6739,7 +6739,7 @@ func testSSECMultipartEncryptedToSSECCopyObjectPart() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test")
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 	}
@@ -6911,7 +6911,7 @@ func testSSECEncryptedToSSECCopyObjectPart() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test")
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 	}
@@ -7066,7 +7066,7 @@ func testSSECEncryptedToUnencryptedCopyPart() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test")
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 	}
@@ -7220,7 +7220,7 @@ func testSSECEncryptedToSSES3CopyObjectPart() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test")
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 	}
@@ -7377,7 +7377,7 @@ func testUnencryptedToSSECCopyObjectPart() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test")
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 	}
@@ -7529,7 +7529,7 @@ func testUnencryptedToUnencryptedCopyPart() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test")
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 	}
@@ -7678,7 +7678,7 @@ func testUnencryptedToSSES3CopyObjectPart() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test")
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 	}
@@ -7829,7 +7829,7 @@ func testSSES3EncryptedToSSECCopyObjectPart() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test")
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 	}
@@ -7982,7 +7982,7 @@ func testSSES3EncryptedToUnencryptedCopyPart() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test")
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 	}
@@ -8132,7 +8132,7 @@ func testSSES3EncryptedToSSES3CopyObjectPart() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test")
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 	}
@@ -8285,7 +8285,7 @@ func testUserMetadataCopyingWrapper(c *minio.Client) {
 	// Generate a new random bucket name.
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test-")
 	// Make a new bucket in 'us-east-1' (source bucket).
-	err := c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err := c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -8484,7 +8484,7 @@ func testStorageClassMetadataPutObject() {
 	// Generate a new random bucket name.
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test")
 	// Make a new bucket in 'us-east-1' (source bucket).
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -8574,7 +8574,7 @@ func testStorageClassInvalidMetadataPutObject() {
 	// Generate a new random bucket name.
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test")
 	// Make a new bucket in 'us-east-1' (source bucket).
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -8619,7 +8619,7 @@ func testStorageClassMetadataCopyObject() {
 	// Generate a new random bucket name.
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test")
 	// Make a new bucket in 'us-east-1' (source bucket).
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -8745,7 +8745,7 @@ func testPutObjectNoLengthV2() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -8819,7 +8819,7 @@ func testPutObjectsUnknownV2() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -8903,7 +8903,7 @@ func testPutObject0ByteV2() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -9019,7 +9019,7 @@ func testFunctionalV2() {
 		"bucketName": bucketName,
 		"location":   location,
 	}
-	err = c.MakeBucket(context.Background(), bucketName, location)
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: location})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -9452,7 +9452,7 @@ func testGetObjectWithContext() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -9560,7 +9560,7 @@ func testFGetObjectWithContext() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -9657,7 +9657,7 @@ func testGetObjectACLWithContext() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -9819,7 +9819,7 @@ func testPutObjectWithContextV2() {
 	bucketName := randString(60, rand.NewSource(time.Now().UnixNano()), "minio-go-test-")
 	args["bucketName"] = bucketName
 
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -9902,7 +9902,7 @@ func testGetObjectWithContextV2() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -10008,7 +10008,7 @@ func testFGetObjectWithContextV2() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket call failed", err)
 		return
@@ -10101,7 +10101,7 @@ func testListObjects() {
 	args["bucketName"] = bucketName
 
 	// Make a new bucket.
-	err = c.MakeBucket(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1"})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
@@ -10210,7 +10210,7 @@ func testRemoveObjectsWithOptions() {
 	args["objectName"] = objectName
 
 	// Make a new bucket.
-	err = c.MakeBucketWithObjectLock(context.Background(), bucketName, "us-east-1")
+	err = c.MakeBucket(context.Background(), bucketName, minio.MakeBucketOptions{Region: "us-east-1", ObjectLocking: true})
 	if err != nil {
 		logError(testName, function, args, startTime, "", "MakeBucket failed", err)
 		return
